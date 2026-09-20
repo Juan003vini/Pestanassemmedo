@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '3465045450321308');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=3465045450321308&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>Lash Expert Workbook | Valentina Reyes</title>
@@ -862,7 +881,7 @@
         <div class="cd-box"><b id="cd-sec">00</b><span>SEG</span></div>
       </div>
 
-      <a href="https://pay.hotmart.com/E107695369U?checkoutMode=10&bid=1789934210743" class="btn btn-primary">🚀 Quiero mi acceso ahora</a>
+      <a href="https://pay.hotmart.com/E107695369U?checkoutMode=10&bid=1789934210743" class="btn btn-primary" onclick="if(typeof fbq=='function'){fbq('track','InitiateCheckout');}">🚀 Quiero mi acceso ahora</a>
 
       <div class="secure-row"><span>🔒 Pago Seguro</span><span>⚡ Acceso Inmediato</span></div>
     </div>
@@ -1023,7 +1042,8 @@
 </footer>
 
 <script>
-  // Countdown real: 60 minutos a partir de la primera visita de cada persona (persiste en localStorage, no se reinicia solo)
+  // Countdown real: 15 minutos por visita. No se reinicia mientras la persona navega,
+  // pero si vuelve despues de que el plazo ya paso, empieza un nuevo plazo de 15 minutos (nueva visita, nueva oportunidad).
   (function(){
     var DURATION_MS = 15 * 60 * 1000;
     var STORAGE_KEY = 'lashOfferDeadline';
@@ -1031,7 +1051,7 @@
     try {
       var stored = localStorage.getItem(STORAGE_KEY);
       deadline = stored ? parseInt(stored, 10) : null;
-      if (!deadline || isNaN(deadline)) {
+      if (!deadline || isNaN(deadline) || Date.now() >= deadline) {
         deadline = Date.now() + DURATION_MS;
         localStorage.setItem(STORAGE_KEY, String(deadline));
       }
